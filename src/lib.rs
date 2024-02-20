@@ -15,3 +15,47 @@ pub fn open_binary(filename: &str) -> Result<Vec<u8>, Box<dyn Error>> {
     f.read(&mut buffer).expect("buffer overflow");
     Ok(buffer)
 }
+
+
+pub fn get_endianess(n: u8) -> &'static str {
+    match n {
+      1 => "little",
+      2 => "big",
+      _ => "Wrong"
+    }
+  }
+  
+pub fn get_elf(n: u8) -> &'static str {
+    match n {
+      1 => "32",
+      2 => "64",
+      _ => "Wrong"
+    }
+  }
+  
+pub fn get_os(n: u8) -> &'static str {
+    match n {
+      0x00 => "System V",
+      0x01 => "HP-UX",
+      0x02 => "NetBSD",
+      0x03 => "Linux",
+      0x04 => "Gnu Hurd",
+      0x06 => "Solaris",
+      0x07 => "AIX",
+      0x08 => "IRIX",
+      0x09 => "FreeBSD",
+      0x0A => "Tru64",
+      0x0B => "Novell Modesto",
+      0x0C => "OpenBSD",
+      0x0D => "OpenVMS",
+      0x0E => "NonStop Kernel",
+      0x0F => "AROS",
+      0x10 => "FenixOS",
+      0x11 => "Nuxi CloudABI",
+      0x12 => "Stratus Technologies OpenVOS",
+      _ => "Unkown"
+    }
+  }
+
+// Byte to Instruction : http://ref.x86asm.net/geek-abc.html / http://ref.x86asm.net/coder.htm / https://sandpile.org/
+

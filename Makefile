@@ -1,14 +1,8 @@
 dev : 
-	cargo watch -c -x 'run'
+	cargo watch -qc  -x 'run' -x 'test --bin=sasha'
 
 test :
-	cargo test
+	cargo test --bin=sasha
 
 build :
 	cargo build
-
-sample :
-	@cd examples/sample01; \
-	terraform init ; \
-	terraform plan -out sample01.out ; \
-	terraform show -json sample01.out > sample01.json ; 
