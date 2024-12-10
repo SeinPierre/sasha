@@ -59,19 +59,18 @@ pub fn get_os(n: u8) -> &'static str {
 
 // Byte to Instruction : http://ref.x86asm.net/geek-abc.html / http://ref.x86asm.net/coder.htm / https://sandpile.org/
 
-pub fn get_opcodes_lines(vec: Vec<u8>) -> Vec<Vec<&'static u8>> {
-    let mut res: Vec<Vec<&u8>> = vec![];
+pub fn get_opcodes_lines(vec: Vec<u8>) -> Vec<Vec<u8>> {
+    let mut res: Vec<Vec<u8>> = vec![];
     let mut it = vec.iter();
     while let Some(&i) = it.next() {
-      // 2 bytes opcodes
-      if i == 0x0F {
-        let v: Vec<&u8> = vec![&0;4];
-        let i = it.next().unwrap();
+      let mut v: Vec<u8> = vec![0];
+      v[0]=i;
+      // If 2 bytes opcodes
+      if i == 0x0F {       
+        let &i = it.next().unwrap();
+        v.push(i);
       }
-      else {
-        // 1 bytes opcodes
-        let v: Vec<&u8> = vec![&0;3];
-      }
+      res.push(v);
     }
 
     res
